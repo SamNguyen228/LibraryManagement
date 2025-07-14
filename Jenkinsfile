@@ -54,20 +54,13 @@ pipeline {
 
         stage('Install Node.js dependencies') {
             steps {
-                bat '''
-                    npm install --legacy-peer-deps
-                '''
+               bat 'npm install --legacy-peer-deps'
             }
         }
 
-       stage('Build React App') {
+        stage('Build React App') {
             steps {
-                bat '''
-                call npm install --legacy-peer-deps
-                powershell -Command "$env:PATH = \\"$pwd\\node_modules\\.bin;\\" + $env:PATH"
-                call npx tsc
-                call npx vite build
-                '''
+                bat 'npm run build'
             }
         }
 
@@ -91,7 +84,7 @@ pipeline {
             steps {
                 bat '''
                     npm install -g serve
-                    start /B serve -s dist -l 5173
+                    serve -s dist -l 5173
                 '''
             }
         }
