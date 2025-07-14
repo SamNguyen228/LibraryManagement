@@ -54,13 +54,14 @@ pipeline {
 
         stage('Install Node.js dependencies') {
             steps {
-               bat 'npm install --legacy-peer-deps'
+                bat 'npm install --legacy-peer-deps'
+                bat 'npm install typescript vite' // Fix lỗi thiếu tsc + vite
             }
         }
 
         stage('Build React App') {
             steps {
-                bat 'npm run build'
+                bat 'npx tsc && npx vite build' // Dùng npx nếu chưa global
             }
         }
 
@@ -82,10 +83,7 @@ pipeline {
 
         stage('Run Frontend') {
             steps {
-                bat '''
-                    npm install -g serve
-                    serve -s dist -l 5173
-                '''
+                bat 'npx serve -s dist -l 5173'
             }
         }
     }
