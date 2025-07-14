@@ -55,7 +55,7 @@ pipeline {
         stage('Install Node.js dependencies') {
             steps {
                 bat 'npm install --legacy-peer-deps'
-                bat 'npm install typescript vite' // Fix lỗi thiếu tsc + vite
+                bat 'npm install typescript vite --legacy-peer-deps'
             }
         }
 
