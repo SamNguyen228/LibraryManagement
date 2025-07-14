@@ -61,7 +61,7 @@ pipeline {
 
         stage('Build React App') {
             steps {
-                bat 'npx tsc && npx vite build'
+                bat '.\\node_modules\\.bin\\tsc && .\\node_modules\\.bin\\vite build'
             }
         }
 
