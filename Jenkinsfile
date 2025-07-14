@@ -54,7 +54,7 @@ pipeline {
 
         stage('Install Node.js dependencies') {
             steps {
-                bat 'npm install'
+                bat 'npm install --legacy-peer-deps'
             }
         }
 
