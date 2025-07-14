@@ -41,6 +41,10 @@
 pipeline {
     agent any
 
+    environment {
+        NODE_ENV = "production"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -50,13 +54,13 @@ pipeline {
 
         stage('Install Node.js dependencies') {
             steps {
-                bat 'npm install --legacy-peer-deps'
+               bat 'npm install --legacy-peer-deps'
             }
         }
 
         stage('Build React App') {
             steps {
-                bat 'npx tsc && npx vite build'
+                bat 'npm run build'
             }
         }
 
@@ -71,14 +75,17 @@ pipeline {
                 bat '''
                     cd backend\\target
                     for /f "tokens=2" %%a in ('tasklist /FI "IMAGENAME eq java.exe" /v ^| findstr "library-management-backend-0.0.1-SNAPSHOT.jar"') do taskkill /PID %%a /F
-                    java -jar library-management-backend-0.0.1-SNAPSHOT.jar --server.port=8081
+                    start java -jar library-management-backend-0.0.1-SNAPSHOT.jar --server.port=8081
                 '''
             }
         }
 
         stage('Run Frontend') {
             steps {
-                bat 'npm run preview'
+                bat '''
+                    npm install -g serve
+                    serve -s dist -l 5173
+                '''
             }
         }
     }
