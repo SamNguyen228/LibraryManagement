@@ -60,11 +60,13 @@ pipeline {
             }
         }
 
-        stage('Build React App') {
+       stage('Build React App') {
             steps {
                 bat '''
-                    set PATH=%CD%\\node_modules\\.bin;%PATH%
-                    npm run build
+                call npm install --legacy-peer-deps
+                powershell -Command "$env:PATH = \\"$pwd\\node_modules\\.bin;\\" + $env:PATH"
+                call npx tsc
+                call npx vite build
                 '''
             }
         }
