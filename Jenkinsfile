@@ -55,13 +55,13 @@ pipeline {
         stage('Install Node.js dependencies') {
             steps {
                 bat 'npm install --legacy-peer-deps'
-                bat 'npm install typescript vite --legacy-peer-deps'
+                bat 'npm install typescript vite --save-dev --legacy-peer-deps'
             }
         }
 
         stage('Build React App') {
             steps {
-                bat 'npx tsc && npx vite build' // Dùng npx nếu chưa global
+                bat 'npx tsc && npx vite build'
             }
         }
 
