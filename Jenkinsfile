@@ -60,7 +60,10 @@ pipeline {
 
         stage('Build React App') {
             steps {
-                bat 'npm run build'
+                bat '''
+                    set PATH=%CD%\\node_modules\\.bin;%PATH%
+                    npm run build
+                '''
             }
         }
 
