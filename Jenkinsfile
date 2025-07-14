@@ -56,6 +56,8 @@ pipeline {
             steps {
                 bat 'npm install --legacy-peer-deps'
                 bat 'npm install typescript vite --save-dev --legacy-peer-deps'
+                bat 'dir node_modules\\typescript\\bin'
+                bat 'dir node_modules\\.bin'
             }
         }
 
