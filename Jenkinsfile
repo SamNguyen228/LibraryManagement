@@ -54,7 +54,9 @@ pipeline {
 
         stage('Install Node.js dependencies') {
             steps {
-               bat 'npm install --legacy-peer-deps'
+                bat '''
+                    npm install --legacy-peer-deps
+                '''
             }
         }
 
@@ -87,7 +89,7 @@ pipeline {
             steps {
                 bat '''
                     npm install -g serve
-                    serve -s dist -l 5173
+                    start /B serve -s dist -l 5173
                 '''
             }
         }
