@@ -20,7 +20,7 @@ public class OpenApiConfig {
                 .info(new Info().title("Library Management API")
                         .description("Library Management System API documentation")
                         .version("1.0.0"))
-                .servers(List.of(new Server().url("http://localhost:8080/api").description("Development Server")))
+                .servers(List.of(new Server().url("http://localhost:8081/api").description("Development Server")))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth", new SecurityScheme()
                                 .type(SecurityScheme.Type.HTTP)
